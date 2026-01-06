@@ -1,0 +1,13 @@
+-- Creates the Streaming table
+-- STREAM read_files enables autoloader
+
+CREATE OR REFRESH STREAMING TABLE workspace.data_engineering_labs_00.sql_csv_autoloader
+SCHEDULE EVERY 1 WEEK AS
+
+SELECT * 
+FROM
+STREAM read_files('/Volumes/workspace/data_engineering_labs_00/v01/csv_files_autoloader_source/',
+format => 'CSV',
+sep => ',',
+header => true
+);
